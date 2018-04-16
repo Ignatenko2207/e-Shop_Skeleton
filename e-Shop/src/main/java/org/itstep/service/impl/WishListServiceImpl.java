@@ -1,7 +1,5 @@
 package org.itstep.service.impl;
 
-import java.util.List;
-
 import org.itstep.dao.WishListDAO;
 import org.itstep.model.WishList;
 import org.itstep.service.WishListService;
@@ -14,7 +12,6 @@ public class WishListServiceImpl implements WishListService {
 	@Autowired
 	private WishListDAO wishListDAO;
 
-	@Override
 	public WishList save(WishList wishList) {
 		if (wishListDAO.getOne(wishList.getId()) != null) {
 			return wishListDAO.save(wishList);
@@ -22,7 +19,6 @@ public class WishListServiceImpl implements WishListService {
 		return null;
 	}
 
-	@Override
 	public WishList update(WishList wishList) {
 		if (wishListDAO.getOne(wishList.getId()) != null) {
 			return wishListDAO.save(wishList);
@@ -30,25 +26,12 @@ public class WishListServiceImpl implements WishListService {
 		return null;
 	}
 
-	@Override
 	public WishList get(Integer id) {
 
 		return wishListDAO.getOne(id);
 	}
 
-	@Override
-	public void delete(Integer id) {
-		WishList wishList = wishListDAO.getOne(id);
-		if(wishList != null) {
-			wishListDAO.delete(id);
-		}
-
+	public void delete(WishList wishList) {
+			wishListDAO.delete(wishList);
 	}
-
-	@Override
-	public List<WishList> findAllByWishList() {
-
-		return wishListDAO.findAllByWishList();
-	}
-
 }

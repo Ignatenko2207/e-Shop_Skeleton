@@ -13,7 +13,6 @@ public interface WishListService {
 
 	WishList get(Integer id);
 
-	void delete(Integer id);
+	void delete(WishList wishList);
 
-	List<WishList> findAllByWishList();
 }
