@@ -12,38 +12,36 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="Goods")
+@Table(name="GOODS")
 public class Good {
 
-	
-	
 	@Id
-	@Column(name = "ArticleID")
+	@Column(name = "ARTICLE_ID")
 	@JsonProperty
 	private String articleId;
 	
 	@JsonProperty
-	@Column(name = "Name")
+	@Column(name = "NAME")
 	private String name;
 	
 	@JsonProperty
-	@Column(name = "Price")
+	@Column(name = "PRICE")
 	private Integer price;
 	
 	@JsonProperty
-	@Column(name = "InitialPrice")
+	@Column(name = "INITIAL_PRICE")
 	private Integer initialPrice;
 	
 	@JsonProperty
-	@Column(name = "Description")
+	@Column(name = "DESCRIPTION")
 	private String description;
 	
 	@JsonProperty
-	@Column(name = "Units")
+	@Column(name = "UNITS")
 	private String units;
 	
 	@JsonProperty
-	@Column(name = "Availability")
+	@Column(name = "AVAILABILITY")
 	private Boolean availability;
 	
 }

@@ -13,26 +13,27 @@ import javax.persistence.Table;
 @Setter
 @Getter
 @Entity
-@Table(name = "account")
+@Table(name = "ACCOUNT")
 public class Account {
+	
 	@Id
-	@Column(name = "login")
+	@Column(name = "LOGIN")
 	@JsonProperty
 	private String login;
 
-	@Column(name = "password")
+	@Column(name = "PASSWORD")
 	@JsonProperty
 	private String password;
 
-	@Column(name = "first_name")
+	@Column(name = "FIRST_NAME")
 	@JsonProperty
 	private String firstName;
 
-	@Column(name = "second_name")
+	@Column(name = "SECOND_NAME")
 	@JsonProperty
 	private String secondName;
 
-	@Column(name = "telephone")
+	@Column(name = "TELEPHONE")
 	@JsonProperty
 	private String telephone;
 

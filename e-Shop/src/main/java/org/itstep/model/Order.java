@@ -15,20 +15,20 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name = "order")
+@Table(name = "ORDER")
 public class Order {
 
 	@Id
 	@JsonProperty
 	@GeneratedValue
-	@Column(name = "id_order")
+	@Column(name = "ID_ORDER")
 	private Integer idOrder;
 	
 	@ManyToOne(targetEntity = Cart.class)
-	private Cart idCart;
+	private Cart cart;
 	
 	@ManyToOne(targetEntity = Good.class)
-	private Good idGood;
+	private Good good;
 
 	
 }

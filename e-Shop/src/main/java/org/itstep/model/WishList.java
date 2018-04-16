@@ -17,12 +17,12 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-@Table(name="Wishlist")
+@Table(name="WISH_LIST")
 public class WishList {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id")
+	@Column(name="ID")
 	@JsonProperty
 	private Integer id;
 	
