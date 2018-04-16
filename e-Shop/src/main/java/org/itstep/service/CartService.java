@@ -2,7 +2,6 @@ package org.itstep.service;
 
 import java.util.List;
 
-import org.itstep.model.Account;
 import org.itstep.model.Cart;
 
 public interface CartService {
@@ -13,9 +12,7 @@ public interface CartService {
 	
 	Cart get(Integer id);
 	
-	void delete(Integer id);
+	void delete(Cart cart);
 	
-	List<Cart> findAllByCart();
-	
-	List<Cart> findAllByCreationTime(Long startPeriod, Long endPeriod);
+	List<Cart> findAllByCreationTime(Long startPeriod, Long endPeriod, String login);
 }

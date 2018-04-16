@@ -1,7 +1,5 @@
 package org.itstep.service;
 
-import java.util.List;
-
 import org.itstep.model.Account;
 
 public interface AccountService {
@@ -12,7 +10,6 @@ public interface AccountService {
 
 	Account get(String login);
 
-	void delete(String login);
+	void delete(Account account);
 
-	List<Account> findAllByAccount();
 }

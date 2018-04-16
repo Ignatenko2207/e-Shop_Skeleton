@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -20,7 +21,7 @@ public class CartController {
 	CartService cartService;
 	
 	@PostMapping ( consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	ResponseEntity<Cart> saveCart(@RequestParam Cart cart){
+	ResponseEntity<Cart> saveCart(@RequestBody Cart cart){
 		if(cartService.save(cart) != null) {
 			return new ResponseEntity<Cart>(cart, HttpStatus.OK);
 		}
@@ -28,7 +29,7 @@ public class CartController {
 	}
 	
 	@PutMapping ( consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	ResponseEntity<Cart> updateCart(@RequestParam Cart cart){
+	ResponseEntity<Cart> updateCart(@RequestBody Cart cart){
 		if(cartService.update(cart) != null) {
 			return new ResponseEntity<Cart>(cart, HttpStatus.OK);
 		}

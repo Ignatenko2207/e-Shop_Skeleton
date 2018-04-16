@@ -1,6 +1,5 @@
 package org.itstep.service.impl;
 
-
 import java.util.List;
 
 import org.itstep.dao.GoodDAO;
@@ -16,15 +15,14 @@ public class GoodServiceImpl implements GoodService {
 	GoodDAO goodDao;
 
 	public Good save(Good good) {
-		if(goodDao.getOne(good.getArticleId()) == null) {
+		if (goodDao.getOne(good.getArticleId()) == null) {
 			return goodDao.save(good);
 		}
-		
 		return null;
 	}
 
 	public Good update(Good good) {
-		if(goodDao.getOne(good.getArticleId()) != null) {
+		if (goodDao.getOne(good.getArticleId()) != null) {
 			return goodDao.save(good);
 		}
 		return null;
@@ -34,11 +32,8 @@ public class GoodServiceImpl implements GoodService {
 		return goodDao.getOne(id);
 	}
 
-	public void delete(String id) {
-		Good good = goodDao.getOne(id);
-		if(good != null) {
-			goodDao.delete(good);
-		}
+	public void delete(Good good) {
+		goodDao.delete(good);
 	}
 
 	public List<Good> findAllByAvailability() {

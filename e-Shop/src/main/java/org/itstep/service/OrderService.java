@@ -1,8 +1,5 @@
 package org.itstep.service;
 
-import java.util.List;
-
-import org.itstep.model.Cart;
 import org.itstep.model.Order;
 
 public interface OrderService {
@@ -13,7 +10,6 @@ public interface OrderService {
 
 	Order get(Integer idOrder);
 
-	void delete(Integer idOrder);
+	void delete(Order order);
 
-	List<Order> findAllByOrder();
 }

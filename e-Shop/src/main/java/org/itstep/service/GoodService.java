@@ -12,7 +12,7 @@ public interface GoodService {
 	
 	Good get(String id);
 	
-	void delete (String id);
+	void delete (Good good);
 
 	List<Good> findAllByAvailability ();
 }
