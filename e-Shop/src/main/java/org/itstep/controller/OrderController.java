@@ -1,6 +1,6 @@
 package org.itstep.controller;
 
-import org.itstep.model.Order;
+import org.itstep.model.GoodOrder;
 import org.itstep.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,36 +22,36 @@ public class OrderController {
 	OrderService orderService;
 	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	ResponseEntity<Order> saveOrder(@RequestBody Order order){
+	ResponseEntity<GoodOrder> saveOrder(@RequestBody GoodOrder order){
 		
 		if (orderService.save(order) != null) {
-			return new ResponseEntity<Order>(order, HttpStatus.OK);
+			return new ResponseEntity<GoodOrder>(order, HttpStatus.OK);
 		}
 		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	}
 	
 	
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	ResponseEntity<Order> updateOrder(@RequestBody Order order){
+	ResponseEntity<GoodOrder> updateOrder(@RequestBody GoodOrder order){
 		
 		if (orderService.save(order) != null) {
-			return new ResponseEntity<Order>(order, HttpStatus.OK);
+			return new ResponseEntity<GoodOrder>(order, HttpStatus.OK);
 		}
 		
 		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	}
 	
 	@DeleteMapping ( consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	ResponseEntity<Order> deleteOrder(@RequestBody Order order){
+	ResponseEntity<GoodOrder> deleteOrder(@RequestBody GoodOrder order){
 		orderService.delete(order);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
 	@GetMapping ( produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	ResponseEntity<Order> getOrder(@RequestBody Integer id){
-		Order orderFromDB = orderService.get(id);
+	ResponseEntity<GoodOrder> getOrder(@RequestBody Integer id){
+		GoodOrder orderFromDB = orderService.get(id);
 		if(orderFromDB != null) {
-			return new ResponseEntity<Order>(orderFromDB, HttpStatus.OK);
+			return new ResponseEntity<GoodOrder>(orderFromDB, HttpStatus.OK);
 		}
 		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	}

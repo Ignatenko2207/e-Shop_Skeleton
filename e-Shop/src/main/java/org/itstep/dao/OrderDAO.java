@@ -1,7 +1,7 @@
 package org.itstep.dao;
 
 import org.hibernate.Session;
-import org.itstep.model.Order;
+import org.itstep.model.GoodOrder;
 import org.itstep.util.HibernateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -12,7 +12,7 @@ public class OrderDAO{
 	@Autowired
 	HibernateUtil hiber;
 	
-	public Order save(Order order) {
+	public GoodOrder save(GoodOrder order) {
 
 		Session session = hiber.getSessionFactory().openSession();
 		session.getTransaction().begin();
@@ -29,12 +29,12 @@ public class OrderDAO{
 		return null;
 	}
 
-	public Order getOne(Integer id) {
+	public GoodOrder getOne(Integer id) {
 		
 		Session session = hiber.getSessionFactory().openSession();
 		session.getTransaction().begin();
 		
-		Order order = session.get(Order.class, id);
+		GoodOrder order = session.get(GoodOrder.class, id);
 		
 		session.getTransaction().commit();
 		session.close();
@@ -42,7 +42,7 @@ public class OrderDAO{
 		return order;
 	}
 
-	public void delete(Order order) {
+	public void delete(GoodOrder order) {
 
 		Session session = hiber.getSessionFactory().openSession();
 		session.getTransaction().begin();

@@ -16,13 +16,17 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(name = "ORDERS")
-public class Order {
+public class GoodOrder {
 
 	@Id
 	@JsonProperty
 	@GeneratedValue
 	@Column(name = "ID_ORDER")
 	private Integer idOrder;
+	
+	@JsonProperty
+	@Column(name = "GOOD_AMOUNT")
+	private Integer amount; 
 	
 	@ManyToOne(targetEntity = Cart.class)
 	private Cart cart;

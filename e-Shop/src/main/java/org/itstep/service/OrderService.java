@@ -1,15 +1,15 @@
 package org.itstep.service;
 
-import org.itstep.model.Order;
+import org.itstep.model.GoodOrder;
 
 public interface OrderService {
 
-	Order save(Order order);
+	GoodOrder save(GoodOrder order);
 
-	Order update(Order order);
+	GoodOrder update(GoodOrder order);
 
-	Order get(Integer idOrder);
+	GoodOrder get(Integer idOrder);
 
-	void delete(Order order);
+	void delete(GoodOrder order);
 
 }

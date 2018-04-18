@@ -6,7 +6,7 @@ import org.hibernate.cfg.Configuration;
 import org.itstep.model.Account;
 import org.itstep.model.Cart;
 import org.itstep.model.Good;
-import org.itstep.model.Order;
+import org.itstep.model.GoodOrder;
 import org.itstep.model.WishList;
 import org.springframework.stereotype.Component;
 
@@ -27,7 +27,7 @@ public class HibernateUtil {
 
 		configuration.addAnnotatedClass(Account.class);
 		configuration.addAnnotatedClass(Good.class);
-		configuration.addAnnotatedClass(Order.class);
+		configuration.addAnnotatedClass(GoodOrder.class);
 		configuration.addAnnotatedClass(Cart.class);
 		configuration.addAnnotatedClass(WishList.class);
 
