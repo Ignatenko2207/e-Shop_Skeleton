@@ -1,7 +1,7 @@
 package org.itstep.controller;
 
-import org.itstep.model.GoodOrder;
-import org.itstep.service.OrderService;
+import org.itstep.model.Account;
+import org.itstep.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,43 +16,43 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(path = "/order")
-public class OrderController {
+@RequestMapping(path = "/account")
+public class AccountController {
 
 	@Autowired
-	OrderService orderService;
+	AccountService accountService;
 	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	ResponseEntity<GoodOrder> saveOrder(@RequestBody GoodOrder order){
+	ResponseEntity<Account> saveAccount(@RequestBody Account account){
 		
-		if (orderService.save(order) != null) {
-			return new ResponseEntity<GoodOrder>(order, HttpStatus.OK);
+		if (accountService.save(account) != null) {
+			return new ResponseEntity<Account>(account, HttpStatus.OK);
 		}
 		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	}
 	
 	
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	ResponseEntity<GoodOrder> updateOrder(@RequestBody GoodOrder order){
+	ResponseEntity<Account> updateAccount(@RequestBody Account account){
 		
-		if (orderService.save(order) != null) {
-			return new ResponseEntity<GoodOrder>(order, HttpStatus.OK);
+		if (accountService.save(account) != null) {
+			return new ResponseEntity<Account>(account, HttpStatus.OK);
 		}
 		
 		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	}
 	
 	@DeleteMapping ( consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	ResponseEntity<GoodOrder> deleteOrder(@RequestBody GoodOrder order){
-		orderService.delete(order);
+	ResponseEntity<Account> deleteAccount(@RequestBody Account account){
+		accountService.delete(account);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
 	@GetMapping ( produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	ResponseEntity<GoodOrder> getOrder(@RequestHeader Integer id){
-		GoodOrder orderFromDB = orderService.get(id);
-		if(orderFromDB != null) {
-			return new ResponseEntity<GoodOrder>(orderFromDB, HttpStatus.OK);
+	ResponseEntity<Account> getAccount(@RequestHeader String login){
+		Account accountFromDB = accountService.get(login);
+		if(accountFromDB != null) {
+			return new ResponseEntity<Account>(accountFromDB, HttpStatus.OK);
 		}
 		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	}

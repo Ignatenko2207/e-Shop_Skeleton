@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -46,7 +47,7 @@ public class CartController {
 	}
 	
 	@GetMapping (path = "/get-one", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	ResponseEntity<Cart> getCart(@RequestBody Integer id){
+	ResponseEntity<Cart> getCart(@RequestHeader Integer id){
 		Cart cartFromDB = cartService.get(id);
 		if(cartFromDB != null) {
 			return new ResponseEntity<Cart>(cartFromDB, HttpStatus.OK);
@@ -55,7 +56,7 @@ public class CartController {
 	}
 	
 	@GetMapping (path = "/get-list", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	ResponseEntity<List<Cart>> getCartsByPeriod(@RequestBody Long startPeriod, @RequestBody Long endPeriod, @RequestBody String login ){
+	ResponseEntity<List<Cart>> getCartsByPeriod(@RequestHeader Long startPeriod, @RequestHeader Long endPeriod, @RequestBody String login ){
 		List<Cart> cartsFromDB = cartService.findAllByCreationTime(startPeriod, endPeriod, login);
 		if(cartsFromDB != null) {
 			return new ResponseEntity<List<Cart>>(cartsFromDB, HttpStatus.OK);

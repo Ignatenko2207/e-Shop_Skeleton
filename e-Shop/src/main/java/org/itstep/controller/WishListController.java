@@ -1,7 +1,7 @@
 package org.itstep.controller;
 
-import org.itstep.model.GoodOrder;
-import org.itstep.service.OrderService;
+import org.itstep.model.WishList;
+import org.itstep.service.WishListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,43 +16,43 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping(path = "/order")
-public class OrderController {
+@RequestMapping(path = "/wishList")
+public class WishListController {
 
 	@Autowired
-	OrderService orderService;
+	WishListService wishListService;
 	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	ResponseEntity<GoodOrder> saveOrder(@RequestBody GoodOrder order){
+	ResponseEntity<WishList> saveWishList(@RequestBody WishList wishList){
 		
-		if (orderService.save(order) != null) {
-			return new ResponseEntity<GoodOrder>(order, HttpStatus.OK);
+		if (wishListService.save(wishList) != null) {
+			return new ResponseEntity<WishList>(wishList, HttpStatus.OK);
 		}
 		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	}
 	
 	
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	ResponseEntity<GoodOrder> updateOrder(@RequestBody GoodOrder order){
+	ResponseEntity<WishList> updateWishList(@RequestBody WishList wishList){
 		
-		if (orderService.save(order) != null) {
-			return new ResponseEntity<GoodOrder>(order, HttpStatus.OK);
+		if (wishListService.save(wishList) != null) {
+			return new ResponseEntity<WishList>(wishList, HttpStatus.OK);
 		}
 		
 		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	}
 	
 	@DeleteMapping ( consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	ResponseEntity<GoodOrder> deleteOrder(@RequestBody GoodOrder order){
-		orderService.delete(order);
+	ResponseEntity<WishList> deleteWishList(@RequestBody WishList wishList){
+		wishListService.delete(wishList);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 	
 	@GetMapping ( produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	ResponseEntity<GoodOrder> getOrder(@RequestHeader Integer id){
-		GoodOrder orderFromDB = orderService.get(id);
-		if(orderFromDB != null) {
-			return new ResponseEntity<GoodOrder>(orderFromDB, HttpStatus.OK);
+	ResponseEntity<WishList> getWishList(@RequestHeader Integer id){
+		WishList wishListFromDB = wishListService.get(id);
+		if(wishListFromDB != null) {
+			return new ResponseEntity<WishList>(wishListFromDB, HttpStatus.OK);
 		}
 		return new ResponseEntity(HttpStatus.BAD_REQUEST);
 	}
