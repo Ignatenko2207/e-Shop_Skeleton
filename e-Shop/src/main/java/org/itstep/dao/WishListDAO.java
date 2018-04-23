@@ -12,6 +12,9 @@ public class WishListDAO{
 	@Autowired
 	HibernateUtil hiber;
 	
+
+	// ADD List<WishList> getByAccount
+	
 	public WishList save(WishList wishList) {
 
 		Session session = hiber.getSessionFactory().openSession();
@@ -52,4 +55,5 @@ public class WishListDAO{
 		session.getTransaction().commit();
 		session.close();
 	}
+	
 }
