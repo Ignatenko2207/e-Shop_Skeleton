@@ -19,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
@@ -69,7 +70,10 @@ public class OrderControllerTest {
 		
 		Mockito.when(orderServise.get(Mockito.anyInt())).thenReturn(order);
 		
-		RequestEntity<Integer> request = new RequestEntity<Integer>(order.getIdOrder(), HttpMethod.GET, new URI("/order"));
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("id", "12345");
+		
+		RequestEntity<Integer> request = new RequestEntity<Integer>(headers, HttpMethod.GET, new URI("/order"));
 		
 		ResponseEntity<GoodOrder> response = testRestTemplate.exchange(request, GoodOrder.class);
 		
