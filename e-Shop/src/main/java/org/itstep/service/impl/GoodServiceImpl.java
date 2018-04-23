@@ -36,7 +36,7 @@ public class GoodServiceImpl implements GoodService {
 		goodDao.delete(good);
 	}
 
-	public List<Good> findAllByAvailability() {
-		return goodDao.findAllByAvailability();
+	public List<Good> findAllByAvailability(Boolean availability) {
+		return goodDao.findAllByAvailability(availability);
 	}
 }

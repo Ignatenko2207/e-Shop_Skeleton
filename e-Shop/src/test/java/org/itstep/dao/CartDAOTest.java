@@ -2,14 +2,13 @@ package org.itstep.dao;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import org.itstep.ApplicationRunner;
 import org.itstep.model.Account;
 import org.itstep.model.Cart;
-import org.itstep.model.Good;
-import org.itstep.model.GoodOrder;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,79 +20,50 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApplicationRunner.class)
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
-public class OrderDAOTest {
+public class CartDAOTest {
 
-	GoodOrder orderInDB;
-		
 	Cart cartInDB;
-	
-	Good goodInDB;
-	
+
 	Account accountInDB;
-	
-	@Autowired
-	OrderDAO orderDAO;
-	
+
 	@Autowired
 	CartDAO cartDAO;
-	
-	@Autowired
-	GoodDAO goodDAO;
-	
+
 	@Autowired
 	AccountDAO accountDAO;
-	
+
 	@Before
 	public void setPreData() {
-		Good good = new Good();
 		Account account = new Account();
 		Cart cart = new Cart();
-		GoodOrder order = new GoodOrder();
-		
-		good.setArticleId("123_my_good");
-		good.setAvailability(Boolean.TRUE);
-		good.setDescription("my description");
-		good.setInitialPrice(2000);
-		good.setPrice(1500);
-		good.setName("My favorite good");
-		good.setUnits("pts");
-		goodInDB = goodDAO.save(good);
-		
+
 		account.setLogin("Ignatenko2207");
 		account.setPassword("12345678");
 		account.setFirstName("Alex");
 		account.setSecondName("Ignatenko");
 		account.setTelephone("+380967933438");
 		accountInDB = accountDAO.save(account);
-		
+
 		cart.setCreationTime(System.currentTimeMillis());
 		cart.setAccount(account);
 		cartInDB = cartDAO.save(cart);
-		
-		order.setGood(good);
-		order.setAmount(2);
-		order.setCart(cart);
-		orderInDB = orderDAO.save(order);
-		
+
 	}
-	
+
 	@Test
-	public void testGetOne() {
-		assertNotNull(orderInDB);
-		
-		GoodOrder testOrder = orderDAO.getOne(orderInDB.getIdOrder());
-		
-		assertEquals(testOrder.getAmount(), Integer.valueOf(2));
-		
-		assertEquals("+380967933438", testOrder.getCart().getAccount().getTelephone());
+	public void testFindAllByCreationTime() {
+
+		List<Cart> carts = cartDAO.findAllByCreationTime((System.currentTimeMillis()-10000), (System.currentTimeMillis()+10000), "Ignatenko2207");
+		 assertNotNull(carts);
+		 assertEquals(1, carts.size());
+		 
+		 assertEquals("+380967933438", carts.get(0).getAccount().getTelephone());
+	
 	}
 
 	@After
 	public void deleteTestData() {
-		orderDAO.delete(orderInDB);
 		cartDAO.delete(cartInDB);
-		goodDAO.delete(goodInDB);
 		accountDAO.delete(accountInDB);
 	}
-
 }

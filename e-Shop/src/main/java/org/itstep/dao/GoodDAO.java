@@ -58,7 +58,7 @@ public class GoodDAO{
 	}
 	
 	
-	public List<Good> findAllByAvailability(){
+	public List<Good> findAllByAvailability(Boolean availability){
 		
 		Session session = hiber.getSessionFactory().openSession();
 		session.getTransaction().begin();
@@ -67,7 +67,7 @@ public class GoodDAO{
 		
 		Query query = session.createNativeQuery(sql, Good.class);
 		
-		query.setParameter("avial", Boolean.TRUE);
+		query.setParameter("avial", availability);
 		
 		List<Good> goods = query.getResultList();
 		

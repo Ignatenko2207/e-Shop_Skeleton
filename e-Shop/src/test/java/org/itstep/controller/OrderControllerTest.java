@@ -1,50 +1,46 @@
-package org.itstep.dao;
+package org.itstep.controller;
 
 import static org.junit.Assert.*;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import org.itstep.ApplicationRunner;
 import org.itstep.model.Account;
 import org.itstep.model.Cart;
 import org.itstep.model.Good;
 import org.itstep.model.GoodOrder;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
+import org.itstep.service.OrderService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = ApplicationRunner.class)
 @SpringBootTest(webEnvironment=WebEnvironment.RANDOM_PORT)
-public class OrderDAOTest {
+public class OrderControllerTest {
 
-	GoodOrder orderInDB;
+	@Autowired
+	TestRestTemplate testRestTemplate;
+	
+	@MockBean
+	OrderService orderServise;
+	
+	@Test
+	public void testGetOrder() throws URISyntaxException {
 		
-	Cart cartInDB;
-	
-	Good goodInDB;
-	
-	Account accountInDB;
-	
-	@Autowired
-	OrderDAO orderDAO;
-	
-	@Autowired
-	CartDAO cartDAO;
-	
-	@Autowired
-	GoodDAO goodDAO;
-	
-	@Autowired
-	AccountDAO accountDAO;
-	
-	@Before
-	public void setPreData() {
 		Good good = new Good();
 		Account account = new Account();
 		Cart cart = new Cart();
@@ -57,43 +53,27 @@ public class OrderDAOTest {
 		good.setPrice(1500);
 		good.setName("My favorite good");
 		good.setUnits("pts");
-		goodInDB = goodDAO.save(good);
 		
 		account.setLogin("Ignatenko2207");
 		account.setPassword("12345678");
 		account.setFirstName("Alex");
 		account.setSecondName("Ignatenko");
 		account.setTelephone("+380967933438");
-		accountInDB = accountDAO.save(account);
 		
 		cart.setCreationTime(System.currentTimeMillis());
 		cart.setAccount(account);
-		cartInDB = cartDAO.save(cart);
 		
 		order.setGood(good);
 		order.setAmount(2);
 		order.setCart(cart);
-		orderInDB = orderDAO.save(order);
 		
-	}
-	
-	@Test
-	public void testGetOne() {
-		assertNotNull(orderInDB);
+		Mockito.when(orderServise.get(Mockito.anyInt())).thenReturn(order);
 		
-		GoodOrder testOrder = orderDAO.getOne(orderInDB.getIdOrder());
+		RequestEntity<Integer> request = new RequestEntity<Integer>(order.getIdOrder(), HttpMethod.GET, new URI("/order"));
 		
-		assertEquals(testOrder.getAmount(), Integer.valueOf(2));
+		ResponseEntity<GoodOrder> response = testRestTemplate.exchange(request, GoodOrder.class);
 		
-		assertEquals("+380967933438", testOrder.getCart().getAccount().getTelephone());
-	}
-
-	@After
-	public void deleteTestData() {
-		orderDAO.delete(orderInDB);
-		cartDAO.delete(cartInDB);
-		goodDAO.delete(goodInDB);
-		accountDAO.delete(accountInDB);
+		assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
 
 }

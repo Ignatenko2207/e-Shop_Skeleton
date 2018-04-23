@@ -14,5 +14,5 @@ public interface GoodService {
 	
 	void delete (Good good);
 
-	List<Good> findAllByAvailability ();
+	List<Good> findAllByAvailability (Boolean availability);
 }
