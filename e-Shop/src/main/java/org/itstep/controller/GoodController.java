@@ -26,8 +26,8 @@ public class GoodController {
 	
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	ResponseEntity<Good> saveGood(@RequestBody Good good){
-		
-		if (goodService.save(good) != null) {
+		Good goodFromDB = goodService.save(good);
+		if (goodFromDB != null) {
 			return new ResponseEntity<Good>(good, HttpStatus.OK);
 		}
 		return new ResponseEntity(HttpStatus.BAD_REQUEST);
@@ -36,8 +36,8 @@ public class GoodController {
 	
 	@PutMapping(consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	ResponseEntity<Good> updateGood(@RequestBody Good good){
-		
-		if (goodService.save(good) != null) {
+		Good goodFromDB = goodService.update(good);
+		if (goodFromDB != null) {
 			return new ResponseEntity<Good>(good, HttpStatus.OK);
 		}
 		
